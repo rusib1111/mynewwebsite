@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MCQ Page</title>
+</head>
+<body>
+  <h2>Question: What is the capital of France?</h2>
+  <form id="quizForm">
+    <input type="radio" name="answer" value="Berlin"> Berlin<br>
+    <input type="radio" name="answer" value="Madrid"> Madrid<br>
+    <input type="radio" name="answer" value="Paris"> Paris<br>
+    <input type="radio" name="answer" value="Rome"> Rome<br><br>
+    <button type="button" onclick="downloadAnswer()">Submit</button>
+  </form>
+
+  <script>
+    function downloadAnswer() {
+      const answers = document.getElementsByName('answer');
+      let selected = null;
+
+      for (const ans of answers) {
+        if (ans.checked) {
+          selected = ans.value;
+          break;
+        }
+      }
+
+      if (!selected) {
+        alert("Please select an answer!");
+        return;
+      }
+
+      const filename = prompt("Enter file name (without .txt):");
+      if (!filename) return;
+
+      const blob = new Blob([`Selected answer: ${selected}`], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename + ".txt";
+      link.click();
+    }
+  </script>
+</body>
+</html>
