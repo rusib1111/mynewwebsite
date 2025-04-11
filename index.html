@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cricket Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e0f7fa;
+      padding: 20px;
+    }
+    .quiz-box {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #00796b;
+    }
+    .question {
+      margin: 20px 0;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #00796b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-box">
+    <h1>Cricket Quiz</h1>
+
+    <div class="question">
+      <p>1. Who won the ICC Cricket World Cup 2011?</p>
+      <input type="radio" name="q1" value="a" /> Australia<br />
+      <input type="radio" name="q1" value="b" /> India<br />
+      <input type="radio" name="q1" value="c" /> Sri Lanka<br />
+    </div>
+
+    <div class="question">
+      <p>2. How many players are there in a cricket team?</p>
+      <input type="radio" name="q2" value="a" /> 10<br />
+      <input type="radio" name="q2" value="b" /> 11<br />
+      <input type="radio" name="q2" value="c" /> 12<br />
+    </div>
+
+    <button onclick="checkAnswers()">Submit</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      let score = 0;
+
+      let q1 = document.querySelector('input[name="q1"]:checked');
+      let q2 = document.querySelector('input[name="q2"]:checked');
+
+      if (q1 && q1.value === "b") score++;
+      if (q2 && q2.value === "b") score++;
+
+      let total = 2;
+      document.getElementById("result").textContent =
+        "You scored " + score + " out of " + total;
+    }
+  </script>
+</body>
+</html>
