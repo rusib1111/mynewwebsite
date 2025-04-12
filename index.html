@@ -51,16 +51,16 @@
 
     <div class="question">
       <p>1. Who won the ICC Cricket World Cup 2011?</p>
-      <input type="radio" name="q1" value="Australia" /> Australia<br />
-      <input type="radio" name="q1" value="India" /> India<br />
-      <input type="radio" name="q1" value="Sri Lanka" /> Sri Lanka<br />
+      <input type="radio" name="q1" value="a" /> Australia<br />
+      <input type="radio" name="q1" value="b" /> India<br />
+      <input type="radio" name="q1" value="c" /> Sri Lanka<br />
     </div>
 
     <div class="question">
       <p>2. How many players are there in a cricket team?</p>
-      <input type="radio" name="q2" value="10" /> 10<br />
-      <input type="radio" name="q2" value="11" /> 11<br />
-      <input type="radio" name="q2" value="12" /> 12<br />
+      <input type="radio" name="q2" value="a" /> 10<br />
+      <input type="radio" name="q2" value="b" /> 11<br />
+      <input type="radio" name="q2" value="c" /> 12<br />
     </div>
 
     <button onclick="checkAnswers()">Submit</button>
@@ -68,39 +68,29 @@
   </div>
 
   <script>
-    function checkAnswers() {
-      let score = 0;
-      let results = "";
+  function checkAnswers() {
+    let score = 0;
 
-      let q1 = document.querySelector('input[name="q1"]:checked');
-      let q2 = document.querySelector('input[name="q2"]:checked');
+    let q1 = document.querySelector('input[name="q1"]:checked');
+    let q2 = document.querySelector('input[name="q2"]:checked');
 
-      if (q1 && q1.value === "India") score++;
-      if (q2 && q2.value === "11") score++;
+    if (q1 && q1.value === "b") score++;
+    if (q2 && q2.value === "b") score++;
 
-      let total = 2;
-      let resultText = "You scored " + score + " out of " + total;
-      document.getElementById("result").textContent = resultText;
+    let total = 2;
+    let resultText = "You scored " + score + " out of " + total;
+    document.getElementById("result").textContent = resultText;
 
-      // Prepare the results as text
-      results += "Quiz Results:\n";
-      results += "1. Who won the ICC Cricket World Cup 2011? Your answer: " + (q1 ? q1.value : "Not answered") + "\n";
-      results += "2. How many players are there in a cricket team? Your answer: " + (q2 ? q2.value : "Not answered") + "\n";
-      results += resultText + "\n";
-
-      // Trigger file download
-      downloadResults(results);
+    // Ask for filename
+    let filename = prompt("Enter a filename (e.g., result.txt):");
+    if (filename) {
+      let blob = new Blob([resultText], { type: "text/plain" });
+      let link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
     }
-
-    function downloadResults(content) {
-      const blob = new Blob([content], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "quiz-results.txt";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-  </script>
+  }
+</script>
 </body>
 </html>
